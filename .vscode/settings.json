@@ -1,0 +1,5 @@
+{
+    "npm.enableScriptExplorer": true,
+    "npm.packageManager": "npm",
+    "javascript.implicitProjectConfig.experimentalDecorators": true
+}
