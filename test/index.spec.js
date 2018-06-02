@@ -1,32 +1,30 @@
-/* global describe, it, before */
+/* 
+  Raw output test
+*/
 
 import chai from 'chai';
-import {Cat, Dog} from '../lib/webpack-library-starter.js';
-
-chai.expect();
+import {Shape, Circle, Square } from '../lib/my-webpack-library';
+import * as myLib from '../lib/my-webpack-library';
 
 const expect = chai.expect;
 
-let lib;
-
-describe('Given an instance of my Cat library', () => {
-  before(() => {
-    lib = new Cat();
-  });
-  describe('when I need the name', () => {
-    it('should return the name', () => {
-      expect(lib.name).to.be.equal('Cat');
+describe('My tests here', () => {
+  describe('My subtests here', () => {
+    it('Should create instances', () => {
+      let sq = new Square();
+      let circ = new Circle();
     });
-  });
-});
-
-describe('Given an instance of my Dog library', () => {
-  before(() => {
-    lib = new Dog();
-  });
-  describe('when I need the name', () => {
-    it('should return the name', () => {
-      expect(lib.name).to.be.equal('Dog');
-    });
+    it('Should calc area for square',()=>
+    {
+      let sq = new Square();
+      sq.edge = 15;
+      expect(sq.area()).equal(15*15);
+    })
+    it('Should calc area for circle',()=>
+    {
+      let circ = new Circle();
+      circ.radius = 10;
+      expect(circ.area()).equal(Math.PI * 10*10);
+    })
   });
 });

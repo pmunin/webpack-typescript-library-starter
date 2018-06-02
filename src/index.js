@@ -1,3 +1,4 @@
-import Cat from './cat.js';
-import Dog from './dog.js';
-export { Dog, Cat };
+export * from './shape'
+export * from './shape.cirle'
+export * from './shape.square'
+export * from './calculate'

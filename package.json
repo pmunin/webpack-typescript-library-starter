@@ -1,45 +1,43 @@
 {
-  "name": "webpack-library-starter",
+  "name": "my-webpack-library",
   "version": "1.0.2",
   "description": "Produce universal library with webpack and es6",
-  "main": "lib/library.js",
+  "main": "lib/my-webpack-library.js",
+  "config": {
+    "cmd_webpack": "webpack --config .webpack/config.js"
+  },
   "scripts": {
-    "build": "webpack --env dev && webpack --env build && npm run test",
-    "dev": "webpack --progress --colors --watch --env dev",
+    "echovar": "cross-var echo $npm_package_config_cmd_webpack",
+    "build": "%npm_package_config_cmd_webpack% --env dev && %npm_package_config_cmd_webpack% --env build && npm run test",
+    "dev": "%npm_package_config_cmd_webpack% --progress --colors --watch --env dev",
     "test": "mocha --require babel-core/register --colors ./test/*.spec.js",
     "test:watch": "mocha --require babel-core/register --colors -w ./test/*.spec.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/krasimir/webpack-library-starter.git"
+    "url": "https://github.com/pmunin/webpack-library-starter.git"
   },
-  "keywords": [
-    "webpack",
-    "es6",
-    "starter",
-    "library",
-    "universal",
-    "umd",
-    "commonjs"
-  ],
-  "author": "Krasimir Tsonev",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/krasimir/webpack-library-starter/issues"
-  },
-  "homepage": "https://github.com/krasimir/webpack-library-starter",
+  "homepage": "https://github.com/pmunin/webpack-library-starter",
   "devDependencies": {
+    "@types/chai": "^4.1.3",
+    "@types/mocha": "^5.2.0",
+    "@types/webpack": "^4.4.0",
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.3",
-    "babel-loader": "^7.1.2",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-env": "^1.6.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
-    "eslint": "^4.13.1",
-    "eslint-loader": "^1.9.0",
-    "mocha": "^4.0.1",
-    "webpack": "^3.10.0",
-    "yargs": "^10.0.3"
+    "cross-var": "^1.1.0",
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.0.0",
+    "jsdoc-babel": "^0.4.0",
+    "mocha": "^5.2.0",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^2.1.4",
+    "yargs": "^11.0.0"
   }
 }

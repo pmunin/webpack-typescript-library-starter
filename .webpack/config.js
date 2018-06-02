@@ -1,31 +1,44 @@
-/* global __dirname, require, module*/
-
+//const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const webpack = require('webpack');
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const env = require('yargs').argv.env; // use --env with webpack 2
-const pkg = require('./package.json');
+
+ var process = require('process');
+ //process.chdir('../')
+//__dirname = __dirname+"/../";
+const pkg = require('../package.json');
+
+
+
 
 let libraryName = pkg.name;
 
 let plugins = [], outputFile;
 
 if (env === 'build') {
-  plugins.push(new UglifyJsPlugin({ minimize: true }));
+  plugins.push(new UglifyJsPlugin({}));
   outputFile = libraryName + '.min.js';
 } else {
   outputFile = libraryName + '.js';
 }
 
+/**
+ * @type {webpack.Configuration}
+ */
 const config = {
-  entry: __dirname + '/src/index.js',
+  //context: path.resolve('src'),
+  //entry: './index.js',
+  entry: path.resolve('src/index.js'),
   devtool: 'source-map',
+  mode: env=='build'? 'production':'development',
   output: {
-    path: __dirname + '/lib',
+    path: path.resolve('lib'),
     filename: outputFile,
     library: libraryName,
     libraryTarget: 'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    globalObject:'(typeof global!=="undefined"?global:window)'
   },
   module: {
     rules: [
@@ -42,7 +55,9 @@ const config = {
     ]
   },
   resolve: {
-    modules: [path.resolve('./node_modules'), path.resolve('./src')],
+    modules: [path.resolve('node_modules')
+    , path.resolve('src')
+  ],
     extensions: ['.json', '.js']
   },
   plugins: plugins
