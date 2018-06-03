@@ -1,0 +1,1 @@
+// TODO: extract to this module all basic logic used by all configurations
