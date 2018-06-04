@@ -13,5 +13,5 @@ Webpack based boilerplate for producing libraries (Input: ES6, Output: universal
 
 ## TODO
 
-[ ] clean package.json dependencies
-[ ] make test build have separate node_modules.js, like dev build
+* [ ] clean package.json dependencies
+* [ ] make test build have separate node_modules.js, like dev build
