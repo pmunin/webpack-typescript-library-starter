@@ -4,8 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 const env = require('yargs').argv.env; // use --env with webpack 2
 //const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-var process = require('process');
+const base = require('./webpack.config.base');
 const pkg = require('../package.json');
 
 let libraryName = pkg.name;
@@ -18,9 +17,9 @@ function _with(obj, objEditFunc) {
 /**
  * @type {webpack.Configuration}
  */
-let config = {
+let config = base.createConfiguration({
   entry: {
-    [libraryName]: path.resolve('src/index.js'),
+    [libraryName]: path.resolve('src/index.ts'),
   },
   devtool: 'source-map',
   mode: 'development',
@@ -31,23 +30,6 @@ let config = {
     libraryTarget: 'umd',
     umdNamedDefine: true,
     globalObject: '(typeof global!=="undefined"?global:window)'
-  },
-  module: {
-    rules: [{
-        test: /(\.jsx|\.js)$/,
-        loader: 'babel-loader',
-        exclude: /(node_modules|bower_components)/
-      },
-      {
-        test: /(\.jsx|\.js)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
-      }
-    ]
-  },
-  resolve: {
-    modules: [path.resolve('node_modules'), path.resolve('src')],
-    extensions: ['.json', '.js', '.jsx']
   },
   //plugins: plugins,
   optimization: {
@@ -76,7 +58,6 @@ let config = {
     providedExports: true,
     usedExports: true,
     concatenateModules: true,
-    //includeTest? {chunks:'all'}:false,
   },
   plugins: [
     // new webpack.optimize.CommonsChunkPlugin({
@@ -84,7 +65,7 @@ let config = {
     //   })
     //new webpack.HashedModuleIdsPlugin()
   ]
-};
+});
 
 
 module.exports = config;

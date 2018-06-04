@@ -3,6 +3,10 @@ const path = require('path');
 const env = require('yargs').argv.env; // use --env with webpack 2
 //const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyPlugin = require('uglifyjs-webpack-plugin')
+//const DeclarationBundlerPlugin = require('declaration-bundler-webpack-plugin')
+
+const base = require('./webpack.config.base');
+
 
 const _ = require('lodash');
 
@@ -25,9 +29,9 @@ function createConfig(overrides) {
   /**
    * @type {webpack.Configuration}
    */
-  let config = {
+  let config = base.createConfiguration({
     entry: {
-      [libraryName]: path.resolve('src/index.js'),
+      [libraryName]: path.resolve('src/index.ts'),
     },
     //devtool: 'hidden-source-map',
     mode: 'production',
@@ -39,30 +43,13 @@ function createConfig(overrides) {
       umdNamedDefine: true,
       globalObject: '(typeof global!=="undefined"?global:window)'
     },
-    module: {
-      rules: [{
-          test: /(\.jsx|\.js)$/,
-          loader: 'babel-loader',
-          exclude: /(node_modules|bower_components)/
-        },
-        {
-          test: /(\.jsx|\.js)$/,
-          loader: 'eslint-loader',
-          exclude: /node_modules/
-        }
-      ]
-    },
-    resolve: {
-      modules: [path.resolve('node_modules'), path.resolve('src')],
-      extensions: ['.json', '.js', '.jsx']
-    },
     optimization: {
       minimize: false,
       occurrenceOrder: true,
       namedModules: true,
       namedChunks: true,
-      splitChunks:{
-          minSize:200*1024*1024,
+      splitChunks: {
+        minSize: 200 * 1024 * 1024,
       },
       removeAvailableModules: true,
       mergeDuplicateChunks: true,
@@ -72,10 +59,15 @@ function createConfig(overrides) {
     },
     plugins: [
       //new webpack.HashedModuleIdsPlugin()
+      //TODO:
+      // new DeclarationBundlerPlugin({
+      //   moduleName: `"${libraryName}"`,
+      //   out: './index.d.ts',
+      // }),
     ]
-  };
+  });
 
-  if(overrides) config = _.merge(config, overrides);
+  if (overrides) config = _.merge(config, overrides);
   return config;
 }
 
@@ -83,27 +75,27 @@ function createConfig(overrides) {
 
 
 module.exports = [
-    createConfig(),//full
-    
-    //minimized
-    createConfig({
-        output:{
-            filename:'[name].min.js'
-        },
-        optimization:{
-            minimize:true,
-            minimizer:[
-                new UglifyPlugin({
-                    uglifyOptions:{
-                        compress:true,
-                        mangle:true,
-                        output:{
-                            comments:false,
-                        },
-                    },
-                    sourceMap:false,
-                })
-            ]
-        },
-    }),
+  createConfig(), //full
+
+  //minimized
+  createConfig({
+    output: {
+      filename: '[name].min.js'
+    },
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new UglifyPlugin({
+          uglifyOptions: {
+            compress: true,
+            mangle: true,
+            output: {
+              comments: false,
+            },
+          },
+          sourceMap: false,
+        })
+      ]
+    },
+  }),
 ];

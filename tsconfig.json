@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "esnext",
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true
+        //"declaration": true,
+        //"declarationDir": "."
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
