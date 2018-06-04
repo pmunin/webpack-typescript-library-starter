@@ -16,10 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmunin/webpack-library-starter.git"
+    "url": "https://github.com/pmunin/webpack-typescript-library-starter.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/pmunin/webpack-library-starter",
+  "homepage": "https://github.com/pmunin/webpack-typescript-library-starter",
   "dependencies": {
     "lodash": "^4.17.10"
   },
