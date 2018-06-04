@@ -1,4 +1,4 @@
-# Webpack library starter
+# Webpack library starter: webpack 4 + babel 6 + mocha + chai + typescript 2.9
 
 Originated from [here](https://github.com/pmunin/webpack-library-starter) and adapted for typescript
 
