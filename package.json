@@ -21,7 +21,7 @@
   "license": "MIT",
   "homepage": "https://github.com/pmunin/webpack-typescript-library-starter",
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.19"
   },
   "devDependencies": {
     "@types/chai": "^4.1.3",
